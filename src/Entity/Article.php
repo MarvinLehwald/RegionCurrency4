@@ -84,6 +84,11 @@ class Article
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
+    private $category;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
     private $specificLocationName;
 
     public function __construct()
@@ -304,5 +309,21 @@ class Article
         $this->specificLocationName = $specificLocationName;
 
         return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCategory()
+    {
+        return $this->category;
+    }
+
+    /**
+     * @param mixed $category
+     */
+    public function setCategory($category): void
+    {
+        $this->category = $category;
     }
 }

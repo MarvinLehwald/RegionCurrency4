@@ -41,14 +41,15 @@ class ArticleFormType extends AbstractType
             ->add('author', UserSelectTextType::class, [
                 'disabled' => $isEdit
             ])
-            ->add('location', ChoiceType::class, [
-                'placeholder' => 'Choose a location',
+            ->add('category', ChoiceType::class, [
+                'placeholder' => 'Wähle eine Kategorie zu die der Artikel gehört.',
                 'choices' => [
-                    'The Solar System' => 'solar_system',
-                    'Near a star' => 'star',
-                    'Interstellar Space' => 'interstellar_space'
+                    'Für Unternehmen' => 'forCompanies',
+                    'Für Verbraucher' => 'forCustomers',
+                    'Regionalwährung - was ist das?' => 'QNA',
+                    'Mitmachen' => 'participate',
+                    'Kontakt' => 'contact'
                 ],
-                'required' => false,
             ])
         ;
 
@@ -74,16 +75,6 @@ class ArticleFormType extends AbstractType
             }
         );
 
-        $builder->get('location')->addEventListener(
-            FormEvents::POST_SUBMIT,
-            function(FormEvent $event) {
-                $form = $event->getForm();
-                $this->setupSpecificLocationNameField(
-                    $form->getParent(),
-                    $form->getData()
-                );
-            }
-        );
     }
 
     private function setupSpecificLocationNameField(FormInterface $form, ?string $location)
